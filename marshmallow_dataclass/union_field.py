@@ -47,14 +47,16 @@ class Union(fields.Field):
                 typ = typ.__supertype__
             try:
                 typeguard.check_type(attr, value, typ)
-                return field._serialize(value, attr, obj, **kwargs)
             except TypeError as e:
                 errors.append(e)
+            else:
+                return field._serialize(value, attr, obj, **kwargs)
         raise TypeError(
             f"Unable to serialize value with any of the fields in the union: {errors}"
         )
 
     def node_output_serialize(self, value: Any, attr: str, obj, **kwargs) -> Any:
+        errors = []
         serialized_outputs = {}
         num_successfully_serialized_outputs = 0
         expected_serialized_output_keys = value.__annotations__.keys()
@@ -71,13 +73,15 @@ class Union(fields.Field):
                     typ = typ.__supertype__
                 try:
                     typeguard.check_type(attr, param_value, typ)
+                except TypeError as e:
+                    pass
+                else:
                     serialized_output = field._serialize(
                         param_value, attr, obj, **kwargs
                     )
                     serialized_outputs[param_key] = serialized_output
                     num_successfully_serialized_outputs += 1
-                except:
-                    pass
+
         if num_successfully_serialized_outputs != len(expected_serialized_output_keys):
             unserializable_outputs = expected_serialized_output_keys - serialized_outputs.keys()
             bad_input_types = [getattr(value, bad_output_key).__class__.__name__ for bad_output_key in list(unserializable_outputs)]
