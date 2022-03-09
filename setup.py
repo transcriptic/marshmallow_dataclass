@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = "8.5.3"
+VERSION = "8.6.0"
 
 CLASSIFIERS = [
     "Development Status :: 4 - Beta",
@@ -51,7 +51,7 @@ setup(
     ),
     author="Ophir LOJKINE",
     author_email="pere.jobs@gmail.com",
-    url="https://github.com/lovasoa/marshmallow_dataclass",
+    url="https://github.com/transcriptic/marshmallow_dataclass",
     keywords=["marshmallow", "dataclass", "serialization"],
     classifiers=CLASSIFIERS,
     license="MIT",

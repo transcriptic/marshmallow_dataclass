@@ -1,5 +1,12 @@
 # marshmallow\_dataclass change log
 
+## v8.6.0 [strateos changes]
+
+- Enable Union `_serialize` function to accept custom marshmallow types. 
+- Add custom serialization function to Union class for values with base class: `NodeOuptut`.
+  ([#1](https://github.com/transcriptic/marshmallow_dataclass/pull/1))
+
+
 ## v8.5.3
 
 - Fix spurious `ValueError` when defining a Union field with explicit default value
