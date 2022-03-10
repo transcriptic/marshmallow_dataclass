@@ -1,6 +1,6 @@
 # marshmallow\_dataclass change log
 
-## v8.6.0 [strateos changes]
+## v8.6.1 [strateos changes]
 
 - Enable Union `_serialize` function to accept custom marshmallow types. 
 - Add custom serialization function to Union class for values with base class: `NodeOuptut`.
