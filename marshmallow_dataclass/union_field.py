@@ -57,12 +57,13 @@ class Union(fields.Field):
 
     def node_output_serialize(self, value: Any, attr: str, obj, **kwargs) -> Any:
         errors = []
+        try:
+            value.__annotations__.keys()
+        except:
+            return "None"
         serialized_outputs = {}
         num_successfully_serialized_outputs = 0
         expected_serialized_output_keys = value.__annotations__.keys()
-        if value is None:
-            return value
-
         for param_key in value.__annotations__.keys():
             param_value = getattr(value, param_key)
 
